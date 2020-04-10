@@ -1,4 +1,4 @@
-import FluentMySQL
+import FluentPostgreSQL
 import Vapor
 
 /// A single entry of a Todo list.

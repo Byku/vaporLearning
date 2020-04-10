@@ -1,4 +1,4 @@
-import FluentMySQL
+import FluentPostgreSQL
 import Vapor
 
 /// Called before your application initializes.
@@ -6,7 +6,7 @@ public func configure(_ config: inout Config,
                       _ env: inout Environment,
                       _ services: inout Services) throws {
     // Register providers first
-    try services.register(FluentMySQLProvider())
+    try services.register(FluentPostgreSQLProvider())
 
     // Register routes to the router
     let router = EngineRouter.default()
@@ -21,17 +21,17 @@ public func configure(_ config: inout Config,
 
     // Register the configured MySQL database to the database config.
     var databases = DatabasesConfig()
-    let databaseConfig = MySQLDatabaseConfig(
+    let databaseConfig = PostgreSQLDatabaseConfig(
         hostname: "localhost",
         username: "vapor",
-        password: "password",
-        database: "vapor")
-    let database = MySQLDatabase(config: databaseConfig)
-    databases.add(database: database, as: .mysql)
+        database: "vapor",
+        password: "password")
+    let database = PostgreSQLDatabase(config: databaseConfig)
+    databases.add(database: database, as: .psql)
     services.register(databases)
 
     // Configure migrations
     var migrations = MigrationConfig()
-    migrations.add(model: Todo.self, database: .mysql)
+    migrations.add(model: Todo.self, database: .psql)
     services.register(migrations)
 }
