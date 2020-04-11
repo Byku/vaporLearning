@@ -2,19 +2,23 @@ import FluentPostgreSQL
 import Vapor
 
 /// A single entry of a Todo list.
-final class Todo: MySQLModel {
-    typealias Database = MySQLDatabase
-    /// The unique identifier for this `Todo`.
+final class Todo: Codable {
     var id: Int?
+    var short: String
+    var long: String
 
-    /// A title describing what this `Todo` entails.
-    var title: String
-
-    /// Creates a new `Todo`.
-    init(id: Int? = nil, title: String) {
-        self.id = id
-        self.title = title
+    init(short: String, long: String) {
+        self.short = short
+        self.long = long
     }
+}
+
+//extension Todo : PostgreSQLModel { }
+extension Todo: Model {
+  typealias Database = PostgreSQLDatabase
+  typealias ID = Int
+  public static var idKey: IDKey = \Todo.id
+
 }
 
 /// Allows `Todo` to be used as a dynamic migration.
