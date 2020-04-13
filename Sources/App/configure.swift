@@ -32,10 +32,10 @@ public func configure(_ config: inout Config,
 
     // Configure migrations
     var migrations = MigrationConfig()
-    migrations.add(model: Todo.self, database: .psql)
-    migrations.add(model: User.self, database: .psql)
-    migrations.add(model: Acronym.self, database: .psql)
-    migrations.add(model: Category.self, database: .psql)
+    migrations.add(model: Todo.self, database: DatabaseIdentifier<Todo.Database>.psql)
+    migrations.add(model: User.self, database:  DatabaseIdentifier<User.Database>.psql)
+    migrations.add(model: Acronym.self, database:  DatabaseIdentifier<Acronym.Database>.psql)
+    migrations.add(model: Category.self, database:  DatabaseIdentifier<Category.Database>.psql)
     migrations.add(model: AcronymCategoryPivot.self, database:  DatabaseIdentifier<AcronymCategoryPivot.Database>.psql)
     services.register(migrations)
 }

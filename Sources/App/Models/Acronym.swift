@@ -13,14 +13,8 @@ final class Acronym: Codable {
         self.userID = userID
     }
 }
- 
-extension Acronym: Model {
-    typealias Database = PostgreSQLDatabase
-    typealias ID = Int
-    public static var idKey: IDKey = \Acronym.id
-}
 
-//extension Acronym: PostgreSQLModel {}
+extension Acronym: PostgreSQLModel {}
 
 extension Acronym: Migration {
     public static func prepare(on conn: PostgreSQLConnection) -> Future<Void> {

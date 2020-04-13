@@ -13,13 +13,13 @@ final class Todo: Codable {
     }
 }
 
-//extension Todo : PostgreSQLModel { }
-extension Todo: Model {
-  typealias Database = PostgreSQLDatabase
-  typealias ID = Int
-  public static var idKey: IDKey = \Todo.id
-
-}
+extension Todo : PostgreSQLModel { }
+//extension Todo: Model {
+//  typealias Database = PostgreSQLDatabase
+//  typealias ID = Int
+//  public static var idKey: IDKey = \Todo.id
+//
+//}
 
 /// Allows `Todo` to be used as a dynamic migration.
 extension Todo: Migration { }

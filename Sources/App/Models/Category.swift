@@ -11,11 +11,7 @@ final class Category: Codable {
 }
 
 
-extension Category: Model {
-    typealias Database = PostgreSQLDatabase
-    typealias ID = Int
-    public static var idKey: IDKey = \Category.id
-}
+extension Category: PostgreSQLModel {}
 
 extension Category: Content {}
 

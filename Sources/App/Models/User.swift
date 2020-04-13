@@ -13,13 +13,7 @@ final class User: Codable {
     }
 }
 
-extension User: Model {
-    typealias Database = PostgreSQLDatabase
-    typealias ID = UUID
-    public static var idKey: IDKey = \User.id
-}
-
-//extension User: PostgreSQLUUIDModel {}
+extension User: PostgreSQLUUIDModel {}
 
 extension User: Content {}
 
