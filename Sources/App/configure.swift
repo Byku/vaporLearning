@@ -35,5 +35,6 @@ public func configure(_ config: inout Config,
     migrations.add(model: Todo.self, database: .psql)
     migrations.add(model: User.self, database: .psql)
     migrations.add(model: Acronym.self, database: .psql)
+    migrations.add(model: Category.self, database: .psql)
     services.register(migrations)
 }
