@@ -36,5 +36,6 @@ public func configure(_ config: inout Config,
     migrations.add(model: User.self, database: .psql)
     migrations.add(model: Acronym.self, database: .psql)
     migrations.add(model: Category.self, database: .psql)
+    migrations.add(model: AcronymCategoryPivot.self, database:  DatabaseIdentifier<AcronymCategoryPivot.Database>.psql)
     services.register(migrations)
 }
