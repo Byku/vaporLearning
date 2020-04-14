@@ -17,6 +17,22 @@ final class AcronymCategoryPivot: PostgreSQLUUIDPivot {
     }
 }
 
-extension AcronymCategoryPivot: Migration {}
+extension AcronymCategoryPivot: Migration {
+    public class func prepare(on conn: PostgreSQLConnection) -> Future<Void> {
+        Database.create(self, on: conn) { builder in
+            try addProperties(to: builder)
+            builder.reference(
+                    from: \.acronymID,
+                    to: \Acronym.id,
+                    onDelete: .cascade
+            )
+            builder.reference(
+                    from: \.categoryID,
+                    to: \Category.id,
+                    onDelete: .cascade
+            )
+        }
+    }
+}
 
 extension AcronymCategoryPivot: ModifiablePivot {}
