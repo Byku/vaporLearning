@@ -21,10 +21,20 @@ public func configure(_ config: inout Config,
 
     // Register the configured MySQL database to the database config.
     var databases = DatabasesConfig()
+    let databaseName: String
+    let databasePort: Int
+    if env == .testing {
+        databaseName = "vapor-test"
+        databasePort = 5433
+    } else {
+        databaseName = "vapor"
+        databasePort = 5432
+    }
     let databaseConfig = PostgreSQLDatabaseConfig(
         hostname: "localhost",
+            port: databasePort,
         username: "vapor",
-        database: "vapor",
+        database: databaseName,
         password: "password")
     let database = PostgreSQLDatabase(config: databaseConfig)
     databases.add(database: database, as: .psql)
@@ -38,4 +48,8 @@ public func configure(_ config: inout Config,
     migrations.add(model: Category.self, database:  DatabaseIdentifier<Category.Database>.psql)
     migrations.add(model: AcronymCategoryPivot.self, database:  DatabaseIdentifier<AcronymCategoryPivot.Database>.psql)
     services.register(migrations)
+
+    var commandConfig = CommandConfig.default()
+    commandConfig.useFluentCommands()
+    services.register(commandConfig)
 }
